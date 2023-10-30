@@ -1081,5 +1081,258 @@
     return 0;
     }
 
+    ------- Finding the frequency of word length in a string -------->
 
+    #include <stdio.h>
+        int main(void) {
+        //! showArray(word, cursors=[t])
+        //! showArray(length, cursors=[i])
+        int i = 0;
+        int t = 0;
+        int l = 0;
+        int j = 0;
+        int nbWords = 0;
+        char word[11];
+        int length[10];//length[5] number of 5-letter-long words in the text
+        for(i=0;i<10;i++){
+        length[i]=0;
+        }
+        scanf("%d", &nbWords);
+        for(t=0;t<nbWords;t++){
+        scanf("%s", word);
+        l = 0;
+        while(word[l]!='\0'){
+        l++;
+        }
+        length[l] = length[l] + 1;
+        printf("%s %d ", word,l);
+        }
+        for(j=0;j<10;j++){
+        printf("There are %d words with %d letters.\n", length[j], j);
+        }
+        return 0;   
+        }
+            
+    ------- Finding the frequency of word length in a string -------->
+  
+    #include <stdio.h>
+    #include <string.h>
     
+    int main(){
+    
+        int i, n, maxLength = 0, currentLength;
+        char word[101];
+        
+        // Get the number of word
+        scanf("%d", &n);
+        
+        // Iterate through all the words
+        for(i = 0; i < n; i++){
+           scanf("%s", word);
+           currentLength = strlen(word);
+           if (currentLength > maxLength) {
+               maxLength = currentLength;
+           }
+        }
+        
+        // Print the maximum length
+        printf("%d\n", maxLength);
+        return 0;
+    }
+
+    ------- Finding which words come first in the giving statement--------> 
+
+    #include <stdio.h>
+    int main(void) {
+    char word1[50];
+    char word2[50];
+    int i = 0;
+    
+        printf("Please enter a word: ");
+        scanf("%s", word1);
+        printf("And another: ");
+        scanf("%s", word2);
+        // Find first letter in which words differ
+        while (word1[i]!='\0' && word2[i]!= '\0' && word1[i] == word2[i]) 
+            i++;
+        if (word1[i] < word2[i])
+            printf("%s comes before %s in the alphabet.\n", word1, word2);
+        else if (word1[i]>word2[i])
+            printf("%s comes after %s in the alphabet.\n", word1, word2);
+        else printf("You entered the same word, %s, twice.\n", word1);
+            
+        return 0;
+    }
+
+    ------- Linear Search -------->
+
+    #include <stdio.h>
+    int main(void) {
+    //! showArray(list, cursors=[i])
+    int list[] = {6, -2, 5, 12, 7, 3, 8, 18, -10, 1};
+    int n = 10;
+    int item, i, found;
+    
+        printf("Which number are you looking for? ");
+        scanf("%d", &item);
+        found = 0;
+        i = 0;
+        while (!found && i<n) {
+            if (item == list[i]) { 
+                found = 1;
+            } else {
+                i++;
+            }
+        }
+        
+        if (!found) {
+            printf("%d is not a member of this list. \n", item);
+        } else {
+            printf("I found %d at index %d in the list. \n", item, i);
+        }
+        
+        return 0;
+    }
+
+    ------- Checking the letter T in a giving word  -------->
+
+        #include <stdio.h>
+        #include <string.h>
+        
+        int main() {
+        char word[51];
+        scanf("%s", word);
+        
+            int len = strlen(word);
+            int mid = (len + 1) / 2; // This calculation ensures that the middle letter is considered in the first half for odd lengths.
+        
+            // Check first half
+            for (int i = 0; i < mid; i++) {
+                if (word[i] == 't' || word[i] == 'T') {
+                    printf("1\n");
+                    return 0; // End program if found
+                }
+            }
+        
+            // Check second half
+            for (int i = mid; i < len; i++) {
+                if (word[i] == 't' || word[i] == 'T') {
+                    printf("2\n");
+                    return 0; // End program if found
+                }
+            }
+        
+            // If not found in entire word
+            printf("-1\n");
+            return 0;
+        }
+
+    ------- Binary search  -------->
+
+    #include<stdio.h>
+    int main(void) {
+    //! showArray(list, cursors=[ia, ib, mid])
+    int list[] = {-10, -3, 2, 5, 8, 14, 77, 106, 759, 900}; /* sorted list */
+    int n = 10;
+    int item;
+    int ia, ib, mid, found;
+    
+        printf("Which number are you looking for? ");
+        scanf("%d", &item);
+        ia = 0;
+        ib = n-1;
+        found = 0;
+        
+        while (!found && (ia <= ib)) {
+            mid = (ia + ib)/2; // middle index
+            if (item == list[mid]) {
+                found = 1;  // found item!
+            } else if (item<list[mid]) {
+                ib = mid-1; // toss the top half
+            } else {
+                ia = mid + 1; // toss the bottom half
+            }
+        }
+        
+        if (!found) {
+            printf("Number %d was not found in the array. \n", item);
+        } else {
+            printf("Number %d was found at index %d in the array.\n", item, mid);
+        }
+        
+        return 0;
+    }
+
+    ------- Bubble sort  -------->
+
+    #include<stdio.h>
+    int main(void) {
+    //! showArray(list, cursors=[i])
+    // Sorting from smallest to largest
+    int list[] = {759, 14, 2, 900, 106, 77, -10, 8, -3, 5}; /* unsorted list */
+    int n = 10;
+    int i, j;
+    int swap;
+    
+        printf("Unsorted list: \n");
+        for (i=0; i<n; i++) {
+            printf("%d ", list[i]);
+        }
+        
+        for (j=0; j<n-1; j++) {
+            for (i=0; i<n-1; i++) {
+                if (list[i] > list[i+1]) {
+                    swap = list[i];
+                    list[i] = list[i+1];
+                    list[i+1] = swap;
+                }
+            }
+        }
+        
+        printf("Unsorted list: \n");
+        for (i=0; i<n; i++) {
+            printf("%d ", list[i]);
+        }
+    
+        return 0;
+    }
+
+    ------- Repeated letters in a word  -------->
+
+    #include <stdio.h>
+    #include <string.h>
+    
+    int main() {
+    char word[51];
+    scanf("%s", word);
+    
+        int len = strlen(word);
+    
+        // Sort the word using bubble sort
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (word[i] > word[j]) {
+                    char temp = word[i];
+                    word[i] = word[j];
+                    word[j] = temp;
+                }
+            }
+        }
+    
+        int count = 0;
+        for (int i = 0; i < len - 1; i++) {
+            if (word[i] == word[i + 1]) {
+                count++;
+                // Skip other occurrences of the same letter
+                while (i < len - 1 && word[i] == word[i + 1]) {
+                    i++;
+                }
+            }
+        }
+    
+        printf("%d\n", count);
+        return 0;
+    }
+    
+
+
